@@ -1,1 +1,1 @@
-figya
+fignya
