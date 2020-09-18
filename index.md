@@ -1,1 +1,1 @@
- [Cleaning Data](not_scope.html "Cleaning Data")
+ [Cleaning Data](nog_scope.html "Cleaning Data")
