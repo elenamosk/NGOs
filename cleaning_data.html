@@ -13077,7 +13077,7 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>The working group had a table with data from the UN ECOSOC website: <a href="https://esango.un.org/civilsociety/displayAdvancedSearch.do?method=search&amp;sessionCheck=false">https://esango.un.org/civilsociety/displayAdvancedSearch.do?method=search&amp;sessionCheck=false</a> at its disposal.</strong></p>
+<p><strong>The working group had at its disposal a table with data from the UN ECOSOC website: <a href="https://esango.un.org/civilsociety/displayAdvancedSearch.do?method=search&amp;sessionCheck=false">https://esango.un.org/civilsociety/displayAdvancedSearch.do?method=search&amp;sessionCheck=false</a>. Rows contain information about specific organizations, and columns presents variables.</strong></p>
 
 </div>
 </div>
@@ -13092,7 +13092,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt"></div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
@@ -13108,7 +13108,7 @@ div#notebook {
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[5]:</div>
+    <div class="prompt output_prompt"></div>
 
 
 
@@ -13280,57 +13280,26 @@ div#notebook {
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>We changed names of some columns and removed columns that did not correspond to the research tasks.</strong></p>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="prompt input_prompt"></div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Removing unnecessary columns</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;EName&#39;</span><span class="p">,</span> <span class="s1">&#39;Address&#39;</span><span class="p">,</span> <span class="s1">&#39;Phone&#39;</span><span class="p">,</span> <span class="s1">&#39;Fax&#39;</span><span class="p">,</span> <span class="s1">&#39;Email&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="c1">#Changing column names</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;Страна&#39;</span><span class="p">:</span><span class="s1">&#39;Country&#39;</span><span class="p">,</span> <span class="s1">&#39;Город&#39;</span><span class="p">:</span> <span class="s1">&#39;City&#39;</span><span class="p">})</span>
 </pre></div>
 
     </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
-RangeIndex: 3543 entries, 0 to 3542
-Data columns (total 20 columns):
-Name              3543 non-null object
-Страна            3530 non-null object
-EName             908 non-null object
-Acronym           2563 non-null object
-Город             3543 non-null object
-Address           3543 non-null object
-Phone             3314 non-null object
-Fax               2417 non-null object
-Email             3542 non-null object
-Site              2837 non-null object
-Languages         3543 non-null object
-Expertise         3212 non-null object
-GScope            3427 non-null object
-AreaOfActivity    2267 non-null object
-Established       2645 non-null float64
-Registered        3211 non-null float64
-Structure         1973 non-null object
-Members           1952 non-null object
-Funding           2352 non-null object
-Affiliation       0 non-null float64
-dtypes: float64(3), object(17)
-memory usage: 553.7+ KB
-</pre>
-</div>
-</div>
-
 </div>
 </div>
 
@@ -13338,53 +13307,26 @@ memory usage: 553.7+ KB
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>We changed names of some columns and removed columns, that were unnecessary for research tasks.</strong></p>
+<p><strong>We started processing individual columns from the "Country" column. Some country names were misspelled.In some cells an address was indicated instead of the country. Also, missing values were present.</strong></p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="prompt input_prompt"></div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Looking for unique values to understand what the problems are in country names</span>
+<span class="n">df</span><span class="o">.</span><span class="n">Country</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+<span class="c1">#Correcting input errors</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;PSouth Africa&#39;</span><span class="p">,</span> <span class="s1">&#39;South Africa&#39;</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;30 A Route de Soral 1232, Confignon, Geneva Switzerland&#39;</span><span class="p">,</span> <span class="s1">&#39;Switzerland&#39;</span><span class="p">)</span>
+<span class="c1">#Removing extra spaces</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Country&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Country&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
 </pre></div>
 
     </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
-RangeIndex: 3543 entries, 0 to 3542
-Data columns (total 11 columns):
-Name              3543 non-null object
-Country           3530 non-null object
-Acronym           2563 non-null object
-City              3543 non-null object
-Languages         3543 non-null object
-Expertise         3212 non-null object
-GScope            3427 non-null object
-AreaOfActivity    2267 non-null object
-Established       2645 non-null float64
-Registered        3211 non-null float64
-Funding           2352 non-null object
-dtypes: float64(2), object(9)
-memory usage: 304.6+ KB
-</pre>
-</div>
-</div>
-
 </div>
 </div>
 
@@ -13392,138 +13334,32 @@ memory usage: 304.6+ KB
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>First column we used to clean was "Country". The country names were not unified, some of cells were filles with an adress instead of country. Also there were some NaNs, that had to be filled.</strong></p>
+<p><strong>The "City" column was filled with organization addresses. For the tasks of our study, it was required to know the specific city where the organization is registered. Therefore, we had to get the name of the city from the address. We downloaded the list of cities in the world from Wikipedia and searched the name of the city in the address according to this list.</strong></p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[23]:</div>
+<div class="prompt input_prompt"></div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Country&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[23]:</div>
-
-
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>index</th>
-      <th>Country</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>0</td>
-      <td>United States of America</td>
-      <td>785</td>
-    </tr>
-    <tr>
-      <td>1</td>
-      <td>India</td>
-      <td>195</td>
-    </tr>
-    <tr>
-      <td>2</td>
-      <td>Switzerland</td>
-      <td>183</td>
-    </tr>
-    <tr>
-      <td>3</td>
-      <td>United Kingdom of Great Britain and Northern I...</td>
-      <td>173</td>
-    </tr>
-    <tr>
-      <td>4</td>
-      <td>France</td>
-      <td>127</td>
-    </tr>
-    <tr>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <td>138</td>
-      <td>San Marino</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <td>139</td>
-      <td>Antigua and Barbuda</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <td>140</td>
-      <td>Mongolia</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <td>141</td>
-      <td>Venezuela</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <td>142</td>
-      <td>Suriname</td>
-      <td>1</td>
-    </tr>
-  </tbody>
-</table>
-<p>143 rows × 2 columns</p>
-</div>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Next column for cleaning was "City". In the original table it was filled with an adress of the organisation. So, we needed to get the name of the city from the address. For this purpose, we took a list of all cities in the world from Wikipedia and saved it in a table called "city". Then we used to compare cities in this table and an adress in our column "City" and extract the city name from it. All the city names wer saved in the new column "City_new".</strong></p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">city</span><span class="p">:</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#In Wikipedia, names of cities are broken down by letter, each letter is on a separate page. We needed to download data from all pages. </span>
+<span class="c1">#To do this, we create a list of all letters</span>
+<span class="n">iter_list</span> <span class="o">=</span> <span class="p">[</span><span class="nb">chr</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">ord</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">),</span> <span class="nb">ord</span><span class="p">(</span><span class="s1">&#39;Z&#39;</span><span class="p">))]</span>
+<span class="c1">#Creating a function that downloads a table with the names of cities and countries from one page (one letter)</span>
+<span class="k">def</span> <span class="nf">wikicities</span><span class="p">(</span><span class="n">ll</span><span class="p">):</span>
+    <span class="n">cities_l</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_html</span><span class="p">(</span><span class="s1">&#39;https://en.wikipedia.org/wiki/List_of_towns_and_cities_with_100,000_or_more_inhabitants/cityname:_</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ll</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">cities_l</span>
+<span class="c1">#Downloading tables for all letters and combine them</span>
+<span class="n">cities</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+<span class="n">list_</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">iter_list</span><span class="p">:</span>
+    <span class="n">city</span> <span class="o">=</span> <span class="n">wikicities</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+    <span class="n">list_</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">city</span><span class="p">)</span>
+<span class="n">cities</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">list_</span><span class="p">)</span>
+<span class="c1">#Looking for the presence of city names from the table &quot;cities&quot; in the address in the &quot;City&quot; column. Saving the received data into a new column &quot;City_new&quot;</span>
+<span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">cities</span><span class="p">:</span>
     <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
         <span class="k">if</span> <span class="n">c</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;City&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
             <span class="n">df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s1">&#39;City_new&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">c</span>
@@ -13542,133 +13378,22 @@ memory usage: 304.6+ KB
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[38]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;city&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[38]:</div>
-
-
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>index</th>
-      <th>city</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>0</td>
-      <td>New York</td>
-      <td>169</td>
-    </tr>
-    <tr>
-      <td>1</td>
-      <td>Geneva</td>
-      <td>123</td>
-    </tr>
-    <tr>
-      <td>2</td>
-      <td>London</td>
-      <td>104</td>
-    </tr>
-    <tr>
-      <td>3</td>
-      <td>Washington DC</td>
-      <td>104</td>
-    </tr>
-    <tr>
-      <td>4</td>
-      <td>Paris</td>
-      <td>74</td>
-    </tr>
-    <tr>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <td>803</td>
-      <td>Kpalimé</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <td>804</td>
-      <td>Magdalena</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <td>805</td>
-      <td>Tallinn</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <td>806</td>
-      <td>Jericho</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <td>807</td>
-      <td>Rewa</td>
-      <td>1</td>
-    </tr>
-  </tbody>
-</table>
-<p>808 rows × 2 columns</p>
-</div>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Next column "Languages" contains information about languages that the organization uses in its activities. It is a categorical variable with multiple choice: each organisation usually use more then one language in its work, so each cell contains information about multiple categories (languages). For our analysis we neded information about the frequency of occurrence of each language, so we used to convert this column in a dummy variables (where each variable presents one language).</strong></p>
+<p><strong>The "Languages" column contains information about the languages that are used in the work of the organization. The organization can use more than one language in its activities, therefore the column contains cells with the list of languages. Those. this column is a multiple choice categorical variable. To do an initial analysis of this column, we split it into dummy variables, where each new column represents a language, 1 denotes whether this language is used in the organization or not.</strong></p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt"></div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Languages&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Languages</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Separating strings in column cells into separate words (each word is a language)</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Languages&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Languages</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+<span class="c1">#Creating a set of all languages that are found in the column</span>
 <span class="n">lang</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
 <span class="n">lang_list</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
@@ -13676,8 +13401,10 @@ memory usage: 304.6+ KB
 <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">lang_list</span><span class="p">):</span>
     <span class="k">for</span> <span class="n">index1</span><span class="p">,</span> <span class="n">item1</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">item</span><span class="p">):</span>
         <span class="n">lang</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">item1</span><span class="p">)</span>
+<span class="c1">#For each language from the set, create a dummy variabl in our table</span>
 <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">lang</span><span class="p">:</span>
     <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="c1">#Filling in new columns</span>
 <span class="n">cols</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span>
 <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">lang</span><span class="p">:</span>
     <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
@@ -13692,16 +13419,24 @@ memory usage: 304.6+ KB
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>The "AreaOfActivity" column lists all countries, where organization operates. It is also a categorical variable with multiple choice, like column "Languages": some organisations used to work in different countries, so the cell may contain information about multiple categories (countries). We converted this column in a dummy variables (where each variable presents one country). For this purpose, we downloaded the list of countries of the world from Wikipedia, saved it to the variable "country".</strong></p>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[54]:</div>
+<div class="prompt input_prompt"></div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">language_count</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">15</span><span class="p">:</span><span class="mi">218</span><span class="p">]:</span>
-    <span class="n">count</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">l</span><span class="p">)]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
-    <span class="n">language_count</span><span class="p">[</span><span class="n">l</span><span class="p">]</span> <span class="o">=</span> <span class="n">count</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-<span class="n">languages</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">language_count</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Checking if a country from the list of countries appears in the cell of the &#39;AreaOfActivity&#39; column. If it occurs, fill in the column for this country with 1.</span>
+<span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">country</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;AreaOfActivity&#39;</span><span class="p">]:</span>
+            <span class="n">df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s1">&#39;AreaOfActivity_</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">c</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">1</span>
 </pre></div>
 
     </div>
@@ -13709,12 +13444,121 @@ memory usage: 304.6+ KB
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>The "Funding" column gives information about the funding of the organization. Funding option categories are defined. But, one organization may have several financing options, i.e. one cell can contain a list of categories. It is also a categorical variable with multiple choice. While working with this column, we defined all possible categories and created a silly variable for each one.</strong></p>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[58]:</div>
+<div class="prompt input_prompt"></div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">languages</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Identifying all possible categories</span>
+<span class="n">matches</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="n">match</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;[A-Z][^A-Z]*&quot;</span><span class="p">,</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;Funding&#39;</span><span class="p">])</span>
+    <span class="n">matches</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">match</span><span class="p">)</span>
+<span class="n">matches_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">matches</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">index1</span><span class="p">,</span> <span class="n">item1</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">item</span><span class="p">):</span>
+        <span class="n">matches_set</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">item1</span><span class="p">)</span>
+<span class="c1">#Creating a list of unique categories</span>
+<span class="n">Funding</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">matches_set</span><span class="p">)</span>
+<span class="c1">#Creating a dummy variable for each category</span>
+<span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">Funding</span><span class="p">:</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Funding_</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">f</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="c1">#Filling in new columns</span>
+<span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">Funding</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;Funding&#39;</span><span class="p">]:</span>
+            <span class="n">df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s1">&#39;Funding_</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">f</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">1</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>"Expertise" column describes which of the main activities of the UN the organization is involved in. Information is presented in 11 possible categories, each category has an additional description of the type of activity. One cell could contain all possible categories with a description. Our task was to highlight each specific category in a separate column, the cells of which contain a description.</strong></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt"></div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Making a list of categories</span>
+<span class="n">patterns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Economic and Social&#39;</span><span class="p">,</span> <span class="s1">&#39;Public Administration&#39;</span><span class="p">,</span> <span class="s1">&#39;Population&#39;</span><span class="p">,</span> <span class="s1">&#39;Conflict Resolution in Africa&#39;</span><span class="p">,</span> <span class="s1">&#39;Sustainable Development&#39;</span><span class="p">,</span> <span class="s1">&#39;Financing for Development&#39;</span><span class="p">,</span> <span class="s1">&#39;Statistics&#39;</span><span class="p">,</span> <span class="s1">&#39;Social Development&#39;</span><span class="p">,</span> <span class="s1">&#39;Gender Issues and Advancement of Women&#39;</span><span class="p">,</span> <span class="s1">&#39;Peace and Development in Africa&#39;</span><span class="p">,</span> <span class="s1">&#39;NEPAD&#39;</span><span class="p">]</span>
+<span class="c1">#Creating a column for each category</span>
+<span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">patterns</span><span class="p">:</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">e</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="c1">#Making a dictionary for errors</span>
+<span class="n">errors</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="c1">#Looping through the rows in the table</span>
+<span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="c1">#Saving the cell in a variable</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;Expertise&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+    <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
+        <span class="c1">#looking for the first category</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">)</span>
+        <span class="n">s1</span> <span class="o">=</span> <span class="n">s</span><span class="p">[:</span><span class="n">p</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">s1</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+            <span class="c1">#If the cell contains information about only one category, saving its description in the appropriate column</span>
+            <span class="k">for</span> <span class="n">ind</span><span class="p">,</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">s1</span> <span class="o">==</span> <span class="n">item</span><span class="p">:</span>
+                    <span class="n">s2</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="n">p</span><span class="o">+</span><span class="mi">1</span><span class="p">:]</span>
+                    <span class="n">p2</span> <span class="o">=</span> <span class="n">s2</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">p2</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+                        <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="n">ind</span><span class="p">]</span> <span class="o">=</span> <span class="n">s2</span>
+                        <span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+                    <span class="c1">#If there are more categories, separating them and then saving the description</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">s3</span> <span class="o">=</span> <span class="n">s2</span><span class="p">[:</span><span class="n">p2</span><span class="p">]</span>
+                        <span class="n">is_found</span> <span class="o">=</span> <span class="kc">False</span>
+                        <span class="k">for</span> <span class="n">ind2</span><span class="p">,</span> <span class="n">item2</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">):</span>
+                            <span class="k">if</span> <span class="n">s3</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="n">item2</span><span class="p">):</span>
+                                <span class="n">s4</span> <span class="o">=</span> <span class="n">s3</span><span class="p">[:</span><span class="o">-</span><span class="nb">len</span><span class="p">(</span><span class="n">item2</span><span class="p">)]</span>
+                                <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="n">ind2</span><span class="p">]</span> <span class="o">=</span> <span class="n">s4</span>
+                                <span class="n">s</span> <span class="o">=</span> <span class="n">s2</span><span class="p">[</span><span class="n">p2</span><span class="o">-</span><span class="nb">len</span><span class="p">(</span><span class="n">item2</span><span class="p">):]</span>
+                                <span class="n">is_found</span> <span class="o">=</span> <span class="kc">True</span>
+                                <span class="k">break</span>
+                        <span class="k">if</span> <span class="ow">not</span> <span class="n">is_found</span><span class="p">:</span>
+                            <span class="n">errors</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">s3</span>
+                            <span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="c1">#If a category is detected that is not in our list, its description is saved in &quot;errors&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">errors</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">s1</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>As a result, we got a table with the cleaned data, most of variables are categorical (presented as stupid variables, in cases where it is necessary).</strong></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt"></div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
 </pre></div>
 
     </div>
@@ -13731,18 +13575,11 @@ memory usage: 304.6+ KB
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>English     3294
-French       944
-Spanish      592
-Arabic       248
-German       143
-            ... 
-Madingo        1
-Fante          1
-Gusii          1
-Oroko          1
-Comorien       1
-Length: 203, dtype: int64
+<pre>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 3541 entries, 0 to 3540
+Columns: 417 entries, Name to NEPAD
+dtypes: datetime64[ns](2), int64(396), object(19)
+memory usage: 11.3+ MB
 </pre>
 </div>
 </div>
@@ -13751,56 +13588,9 @@ Length: 203, dtype: int64
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Column "Gscope" contains information about activity width of an organisation. It is categorical variable, with four possible categories: International, National, Local, Regional. It also contained NaNs, so we used to fill it with "unknown"</strong></p>
-
-</div>
-</div>
-</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[59]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;GScope&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;GScope&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="s1">&#39;unknown&#39;</span><span class="p">)</span>
-<span class="n">df</span><span class="p">[</span><span class="s1">&#39;GScope&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[59]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>International    1819
-National          999
-Local             319
-Regional          288
-unknown           116
-Name: GScope, dtype: int64</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt"></div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span> 
